@@ -1,0 +1,14 @@
+Variable 
+
+- int -> integer 2**31
+- long -> long number 2**63
+- double -> (double) ex  4.5
+- float -> (float) 4.5
+- char -> one character (you can use uni code values like '\u00AE' and use single cout -> '' )
+- string -> for a normal string (use double cout -> "" / string is a CLASS in java that contains methods)
+- boolean -> true or false
+
+Print in java
+
+- sout -> System.out.println()
+

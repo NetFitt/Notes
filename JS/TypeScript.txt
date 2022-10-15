@@ -1,0 +1,131 @@
+// Line Comands
+
+tsc -v  ---> to know the version of typescript
+tsc <name of the .TS file> ---> compile TS file to JS file
+tsc -h ---> to help 
+tsc -w ---> watching the .TS file to auto compile to .JS
+tsc -init ---> creates a file called tsconfog.json
+
+// Informations
+
+ 
+ /Statically Typed Language Like [Rust, C, C++]
+- Variables Types Are Static, Once You Declare It You Cannot Change
+- Type Of A Variable Is Known At Compile Time "Do Type Checking At Compile-Time"
+--- Have Better Performance At Run-Time Due To Not Needing To Check Types Dynamically
+- Error Detected Earlier
+
+ Dynamically Typed Language Like [PHP, Python, JavaScript]
+- Variables Types Are Dynamic, You Can Always Change It
+- "Type Checking At Execution-Time"
+- Error Can Be Detected After Execution
+
+let theName = "Elzero";
+let theAge: number = 40;
+let hire: boolean = true;
+let all: any = "Elzero Web School";
+let allVars; // Any
+
+function add(n1: number, n2: number) {
+  return n1 + n2;
+}
+
+
+
+ /Type Annotations With Multidimensional Arrays
+
+let arrayOne: number[] = [1, 2, 3, 4, 5];
+let arrayTwo: string[] = ["A", "B", "C"];
+let arrayThree: (string | number)[] = [1, 2, 3, 4, "A", "B", "C"];
+
+let arrayFour: (string | number | string[] | boolean)[] = [1, 2, 3, 4, "A", "B", ["C", "D"], true, false];
+
+
+
+ /Type Annotations With Functions
+
+  - noImplicitAny
+
+  - noImplicitReturns
+  --- Will Check All Code Paths In A Function To Ensure They Return A Value
+
+  - noUnusedLocals
+  --- Report Errors On Unused Local Variables
+
+  - noUnusedParameters
+  --- Report Errors On Unused Parameters In Functions.
+
+
+
+ /Function ep 9
+  - Optional and Default Parameters
+
+  - In JavaScript, Every Parameter Is Optional => "undefined" If You Didnt Use It
+  - "?" Optional Parameter
+
+  - Rest Parameter
+  - What About Float => All Is Under Type Number
+	function showData(name?: string, age?: number, country?: string) {
+  	return `${name} - ${age} - ${country}`;
+	}
+
+	console.log(showData("Osama", 40, "Egypt"));
+
+
+
+ /Data Types
+  - Type Alias
+
+	type standnum = string | number;
+	let all: standnum = 10;
+	all = 100;
+	all = "Osama";
+
+  - Advanced Type Alias
+
+	type Buttons = {
+  	  up: string,
+ 	  right: string,
+ 	  down: string,
+ 	  left: string
+	}
+
+	type Last = Buttons & {
+	  x: boolean
+	
+ 	}
+
+  - Literal Types
+
+	type nums = 0 | 1 | -1;
+
+  - Tuple
+  --- Is Another Sort Of Array Type
+  --- We knows Exactly How Many Elements It Contains
+  --- We Knows Which Types It Contains At Specific Positions
+	
+	let article: readonly [number, string, boolean] = [11, "Title One", true]; when you put read only you cant push 
+	article = [12, "Title Two", false];
+	// article.push(100);
+
+
+/Data Types
+  - Void
+  --- Function That Will Return Nothing
+  --- Function In JavaScript That Not Return A Value Will Show undefined
+  --- undefined is not void
+  - Never
+  --- Return Type Never Returns
+  --- The Function Doesn't Have A Normal Completion
+  --- It Throws An Error Or Never Finishes Running At All "Infinite Loop"
+  - Enums => Enumerations
+  --- Allow Us To Declare A Set Of Named Constants
+  --- Used For Logical Grouping Collection Of Constants "Collection Of Related Values"
+  --- It Organize Your Code
+  --- By Default Enums Are Number-Based, First Element Is 0
+  --- Theres A Numeric Enums
+  --- Theres A String-Based Enums
+  --- Theres Heterogeneous Enums [String + Number]
+
+
+

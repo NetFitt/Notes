@@ -1,0 +1,330 @@
+/*
+UNARY  1s chapiter
+
+syntacs sugar  //2nd chapiter
+
+Number Methods
+  - Two Dots To Call A Methods
+  - toString() 
+  - toFixed()
+  - parseInt()
+  - parseFloat()
+  - isInteger() [ES6]
+  - isNaN() [ES6]  */
+
+
+- Number
+                            console.log((100).toString());
+                            console.log(100.10.toString());
+
+                            console.log(100.554555.toFixed(2));
+
+                            console.log(Number("100 Osama"));
+                            console.log(+"100 Osama");
+                            console.log(parseInt("100 Osama"));
+                            console.log(parseInt("Osama 100 Osama"));
+                            console.log(parseInt("100.500 Osama"));
+                            console.log(parseFloat("100.500 Osama"));
+
+                            console.log(Number.isInteger("100"));
+                            console.log(Number.isInteger(100.500));
+                            console.log(Number.isInteger(100));
+
+/*
+Math Object
+  - round()
+  - ceil()
+  - floor()
+  - min()
+  - max()
+  - pow()
+  - random()
+  - trunc() [Es6] */
+
+
+- math object         
+                            console.log(Math.round(99.2));
+                            console.log(Math.round(99.5));
+
+                            console.log(Math.ceil(99.2));
+                            console.log(Math.floor(99.9));
+
+                            console.log(Math.min(10, 20, 100, -100, 90));
+                            console.log(Math.max(10, 20, 100, -100, 90));
+
+                            console.log(Math.pow(2, 4));
+                            console.log(Math.random());
+                            console.log(Math.trunc(99.5));
+
+/*
+String Methods
+  - Access With Index
+  - Access With charAt()
+  - length
+  - trim()
+  - toUpperCase()
+  - toLowerCase()
+  - Chain Methods
+  - indexOf(Value [Mand], Start [Opt] 0)
+  - lastIndexOf(Value [Mand], Start [Opt] Length)
+  - slice(Start [Mand], End [Opt] Not Include End)
+  - repeat(Times) [ES6]
+  - split(Separator [Opt], Limit [Opt])
+  - substring(Start [Mand], End [Opt] Not Including End)
+  --- Start > End Will Swap
+  --- Start < 0 It Start From 0
+  --- Use Length To Get Last Character
+  - substr(Start [Mand], Characters To Extract)
+  --- Start >= Length = ""
+  --- Negative Start From End
+  - includes(Value [Mand], Start [Opt] Default 0) [ES6]
+  - startsWith(Value [Mand], Start [Opt] Default 0) [ES6]
+  - endsWith(Value [Mand], Length [Opt] Default Full Length) [ES6]
+  
+*/
+
+-strings          
+                            let theName = "  Ahmed  ";
+
+                            console.log(theName);
+                            console.log(theName[1]);
+                            console.log(theName[5]);
+
+                            console.log(theName.charAt(1));
+                            console.log(theName.charAt(5));
+
+                            console.log(theName.length);
+                            console.log(theName.trim());
+
+                            console.log(theName.toUpperCase());
+                            console.log(theName.toLowerCase());
+
+                            console.log(theName.trim().charAt(2).toUpperCase());
+
+                            let a = "Elzero Web School";
+
+                            console.log(a.indexOf("Web"));
+                            console.log(a.indexOf("Web", 8));
+                            console.log(a.indexOf("o")); // 5
+                            console.log(a.lastIndexOf("o")); // 15
+
+                            console.log(a.slice(2, 6));
+                            console.log(a.slice(-5, -3));
+
+                            console.log(a.repeat(5));
+
+                            console.log(a.split("", 6));
+
+                            console.log(a.length);
+
+                            console.log(a.substring(2, 6));
+                            console.log(a.substring(6, 2));
+                            console.log(a.substring(-10, 6)); // 0 - 6
+                            console.log(a.substring(a.length - 5, a.length - 3));
+
+                            console.log(a.substr(0, 6));
+                            console.log(a.substr(17));
+                            console.log(a.substr(-3));
+                            console.log(a.substr(-5, 2));
+
+                            console.log(a.includes("Web"));
+                            console.log(a.includes("Web", 8));
+
+                            console.log(a.startsWith("E"));
+                            console.log(a.startsWith("E", 2));
+                            console.log(a.startsWith("zero", 2));
+
+                            console.log(a.endsWith("l"));
+
+
+ /* Comparison Operators
+  - == Equal
+  - != Not Equal
+
+  - === Identical
+  - !== Not Identical
+
+  - > Larger Than
+  - >= Larger Than Or Equal
+
+  - < Smaller Than
+  - <= Smaller Than Or Equal
+
+  - ! Not
+  - && And
+  - || Or
+  */
+
+
+- Comparison Operators exapmles
+
+                            console.log(10 == "10"); // Compare Value Only
+                            console.log(-100 == "-100"); // Compare Value Only
+                            console.log(10 != "10"); // Compare Value Only
+
+                            console.log(10 === "10"); // Compare Value + Type
+                            console.log(10 !== "10"); // Compare Value + Type
+                            console.log(10 !== 10); // Compare Value + Type
+
+
+/*  Conditional (Ternary) Operator
+        Condition ? If True : If False
+*/
+
+-ternary 
+                        theGender === "Male" ? console.log("Mr") : console.log("Mrs");
+
+                        let result = theGender === "Male" ? "Mr" : "Mrs";
+
+                        document.write(result);
+
+                        console.log(theGender === "Male" ? "Mr" : "Mrs");
+
+                        console.log(`Hello ${theGender === "Male" ? "Mr" : "Mrs"} ${theName}`);
+
+                        theAge < 20
+                        ? console.log(20)
+                        : theAge > 20 && theAge < 60
+                        ? console.log("20 To 60")
+                        : theAge > 60
+                        ? console.log("Larger Than 60")
+                        : console.log("Unknown");
+
+
+/*  Logical Or ||
+  -- Null + Undefined + Any Falsy Value
+  Nullish Coalescing Operator ??
+  -- Null + Undefined
+  */
+
+
+- logical or (examples)
+
+                    console.log(Boolean(100));
+                    console.log(Boolean(-100));
+                    console.log(Boolean(0));
+                    console.log(Boolean(""));
+                    console.log(Boolean(null));
+
+                    let price = 0;
+
+                    console.log(`The Price Is ${price || 200}`);
+                    console.log(`The Price Is ${price ?? 200}`);
+
+/*  Switch Statement
+  switch(expression) {
+    Case 1:
+      // Code Block
+      break;
+    Case 2:
+      // Code Block
+      break;
+    Default:
+      // Code Block
+  }
+  - Default Ordering
+  - Multiple Match
+  - ===
+  */
+
+-switch examples
+                    let day = "A";
+
+                    switch (day) {
+                    default:
+                        console.log("Unknown Day");
+                        break;
+                    case 0:
+                        console.log("Saturday");
+                        break;
+                    case 1:
+                        console.log("Sunday");
+                        break;
+                    case 2:
+                    case 3:
+                        console.log("Monday");
+                        break;
+                    }
+
+/*Arrays
+  - Create Arrays [Two Methods] : new Array() + []
+  - Access Arrays Elements
+  - Nested Arrays
+  - Change Arrays Elements
+  - Check For Array Array.isArray(arr);
+
+  Arrays Methods [Adding And Removing]
+  - unshift("", "") Add Element To The First
+  - push("", "") Add Element To The End
+  - shift() Remove First Element From Array
+  - pop() Remove Last Element From Array
+
+  Arrays Methods [Search]
+  - indexOf(Search Element, From Index [Opt])
+  - lastIndexOf(Search Element, From Index [Opt])
+  - includes(valueToFind, fromIndex [Opt]) [ES7]
+  
+  Arrays Methods [Sort]
+  - sort(Function [Opt])
+  - reverse
+  
+  Arrays Methods [Slicing]
+  - slice(Start [Opt], End [Opt] Not Including End)
+  --- slice() => All Array
+  --- If Start Is Undefined => 0
+  --- Negative Count From End
+  --- If End Is Undefined || > Indexes => Slice To The End Array.length
+  --- Return New Array
+  - splice(Start [Mand], DeleteCount [Opt] [0 No Remove], The Items To Add [Opt])
+  --- If Negative => Start From The End
+  
+  Arrays Methods [Joining]
+  - concat(array, array) => Return A New Array
+  - join(Separator)
+  */
+
+
+- arrays examples
+
+                    let myFriends = ["Ahmed", "Mohamed", "Sayed", "Alaa"];
+
+                    console.log(myFriends);
+
+                    myFriends.unshift("Osama", "Nabil");
+
+                    console.log(myFriends);
+
+                    myFriends.push("Samah", "Eman");
+
+                    console.log(myFriends);
+
+                    let first = myFriends.shift();
+
+                    console.log(myFriends);
+
+                    console.log(`First Name Is ${first}`);
+
+                    let last = myFriends.pop();
+
+                    console.log(myFriends);
+
+                    console.log(`Last Name Is ${last}`); 
+
+                    let myFriends = ["Ahmed", "Mohamed", "Sayed", "Alaa", "Ahmed"];
+
+                    console.log(myFriends);
+
+                    console.log(myFriends.indexOf("Ahmed"));
+                    console.log(myFriends.indexOf("Ahmed", 2));
+
+                    console.log(myFriends.lastIndexOf("Ahmed"));
+                    console.log(myFriends.lastIndexOf("Ahmed", -2));
+
+                    console.log(myFriends.includes("Ahmed"));
+                    console.log(myFriends.includes("Ahmed", 2));
+
+                    if (myFriends.lastIndexOf("Osama") === -1) {
+                      console.log("Not Found");
+                    }
+
+         

@@ -1,0 +1,370 @@
+Relational database
+
+-Primary key -> these are unic (only one inside a table) however it can have multi columns more than on column 
+-composite key -> is a primary key that that have more than one column (in the primary key rows can be relations like the person of id: 1 is a boss of the person of id :2) 
+	 	  we use this because some times one column is not enough to unicly endtify each row so we add another column
+		  in this case one column can have the same values repeated but not both combined (first column + second column == unic primary key ) 
+
+-surget and natural --> they are both primary but primary has data that are unic from the real world like email or id card number
+
+
+-Foreign key -> these are primary keys in another table or the primary of the same table 
+		  (in the primary key rows can be relations like the person of id: 1 is a boss of the person of id :2) 
+	 	  we use this because some times one column is not enough to unicly endtify each row so we add another column
+		  in this case one column can have the same values repeated but not both combined (first column + second column == unic primary key ) 
+
+
+
+
+
+//////////////////////////////////////////////////////////////////  SQL (Structured Query Language)  /////////////////////////////////////////////////////////////////////////
+
+
+sql is a hybird language which contais of 4types of languages
+
+-Data Query Language (DQL)--> used to query the database dor informations / get infomation that is already stored
+
+-Data Defintion Language (DDL) --> used for defining database schemas
+
+-Data Control Language (DCL) --> used for controling access to the data in the database 
+
+-Data Manupilation Language (DML) --> used for inserting , update and deleting data from the database
+
+
+-- CREATING TABELES
+
+- Data Type's  
+
+INT --> whole number
+
+DECIMAL(M,N) --> Decimal Numbers - Exact Value ( M is the total of digites / N is number of digites after the , )
+
+VARCHAR(100) --> String of text of length 100 charachter
+
+BLOB --> Binary Large Object , Stores large data (usualy used for images or files)
+
+DATE --> "YYYY-MM-DD" 	
+
+TIMESPACE --> "YYYY-MM-DD HH:MM:SS" - used for recording 
+
+- Creating tabels
+
+CREATE TABLE student (
+
+    student_id INT PRIMARY KEY,
+
+    name VARCHAR(40),
+    major VARCHAR(20)
+
+-------------or--------------
+
+    student_id INT,
+    name VARCHAR(40),
+    major VARCHAR(20),
+
+    PRIMARY KEY(student_id) --> (you can declare PRIMARY KEY like this instead)
+    
+);
+
+
+////////////////// DROPING AND DESCRIBE INFO
+
+DESCRIBE student; --> used to display the tabel and the info of that tabel
+
+DROP TABLE student; --> for deleting the previous tabel
+
+
+////////////////// ADDING COLUMNS 
+
+ALTER TABLE student ADD gpa DECIMAL(3,2); --> for adding new column in student table 
+
+ALTER TABLE student DROP COLUMN gpa ; --> for droping that column gpa
+
+
+////////////////// INSERT DATA TO A TABLE
+
+INSERT INTO student VALUES (1,'mohamed','english'); --> that query insert data to the tabel as a row (1 represent 1st column /mohamed 2nd/english 3rd )
+
+INSERT INTO student (student_id , name) VALUES (2, 'moh'); --> this choses what you want to insert specificaly
+
+INSERT INTO student VALUES (1,'jack ', 'math', 3.2 ),
+			   (2 , 'mohamed ', 'english',4.5),  --> to isert multi rows
+			   (3,'rachid', 'biology',2.1); 
+
+SELECT * FROM student ; --> that gives all info in student table 
+
+
+////////////////// CONSTRAINT (it makes creating table more relevant and better)
+
+NOTNULL --> column cant be null , 
+
+UNIQUE --> this column is unique in every row (it cant be repeated) , 
+
+DEFAULT --> IF : the user didnt enter  a value give a default value ,
+
+AUTO_INCREMENT --> that means that PRIMARY KEY will auto add number from 0 if not found or not specified as long as its a type of INT
+
+
+EXAMPLE :
+
+CREATE TABLE student (
+
+    student_id INT AUTO_INCREMENT, --> thats how to define a column as AUTO_INCREMENT
+
+    name VARCHAR(40) UNIQUE --> thats how to define a column as UNIQUE
+
+    major VARCHAR(20) DEFAULT 'Undecided' , --> thats how to define a column as DEAFAULT and give it a DEFAULT VALUE 
+
+    gpa NOTNULL, --> thats how to define a column as NOTNULL 
+
+    PRIMARY KEY (student_id)
+);
+
+
+FUNN FACT --> A PRIMARY KEY is actualy a NOTNULL and UNIQUE column
+
+
+////////////////// UPDATE AND DELETE  AND WHERE (OR / AND)
+
+
+UPDATE student 
+SET major = 'bio'; --> this SET all rows of this column to bio
+
+
+UPDATE student 
+SET major = 'bio'
+WHERE major = 'biology';--> this will UPDATE only values of major = 'biology'
+
+
+UPDATE student 
+SET major = 'bio', gpa = 3.5      --> you can SET multiple columns 
+WHERE student_id = 4 OR student_id = 5;     --> this will UPDATE only when student_id is 4 or 5
+
+
+UPDATE student 
+SET major = 'bio', gpa = 3.5 
+WHERE name = mohamed AND gpa = 3;     --> this will UPDATE every row that have name = mohamed and gpa = 3;
+
+/DELETE 
+
+DELETE FROM student;      --> this will delete every thing inside studente table
+
+DELETE FROM student 
+WHERE student_id = 5 OR student_id = 6;      --> it will delete rows that have student_id = 5 OR 6
+
+
+////////////////// SELECT(ORDER BY , LIMIT , WHERE , IN , AS ,DISTINCT)
+
+
+SELECT * FROM student;          --> this garp all data of student table
+ 
+SELECT name , student_id 
+FROM student
+ORDER BY major DESC;         --> to ORDER all rows ALPHABTICLY on major (you can add DESC so it start from the bottom) ASC for normal
+
+SELECT name AS sure  , student_id AS mite         	--> now when the result shows sure and mite instead of name and student_id
+FROM student
+ORDER BY major , name          --> to ORDER BY major then if 2 rows have the same major order them by name instead 
+LIMIT 2;        --> so it gives you 2 rows
+
+SELECT * FROM student 
+WHERE major = 'bio' AND name <> 'mohamed';          --> this to get specific data (<> this meant not equal !=)
+
+SELECT * FROM student 
+WHERE name IN ('mohamed','kate','ryadh' );         --> this says if name is one of those ('mohamed','kate','ryadh') thene return it 
+
+SELECT DISTINCT sex  --> DISTINCT gives all difrent values of sex column (in this case it return M and F)
+FROM employee;
+
+
+////////////////// FOREIGN KEY (REFERENCES , ON DELETE SET NULL , ON DELETE SET CASCADE), COMPOSITE KEY
+
+
+CREATE TABLE branch (
+  branch_id INT PRIMARY KEY,
+  branch_name VARCHAR(40),
+  mgr_id INT,
+  mgr_start_date DATE,
+  FOREIGN KEY(mgr_id) REFERENCES employee(emp_id) ON DELETE SET NULL    --> this is a FOREIGN KEY that refere to  employee(emp_id) PRIMARY KEY
+);                                                                          if a record in the parent table is deleted, then the corresponding records in the 
+									    child table will have the foreign key fields set to NULL
+									    ON CASCADE it DELETE the child too	
+
+you cant creat an FOREIGN KEY if the primary key is not defined yet so sometimes you have to define a FOREIGN KEY after creting a table :
+
+ALTER TABLE employee
+ADD FOREIGN KEY(branch_id)
+REFERENCES branch(branch_id)
+ON DELETE SET NULL;
+
+CREATE TABLE works_with (
+  emp_id INT,
+  client_id INT,
+  total_sales INT,
+  PRIMARY KEY(emp_id, client_id), --> COMPOSITE KEY that is made of 2 columns representing 1 PRIMARY KEY
+  FOREIGN KEY(emp_id) REFERENCES employee(emp_id) ON DELETE CASCADE,
+  FOREIGN KEY(client_id) REFERENCES client(client_id) ON DELETE CASCADE
+);
+
+
+////////////////// FUNCTIONS (COUNT , AVG , SUM , AGREGATION --> GROUP BY )
+
+
+SELECT COUNT(emp_id) --> this will count all emp_id (NULL wont be counted)
+FROM employee;
+
+SELECT AVG(salary) --> this will return the average of all salarys of all M employees 
+FROM employee
+WHERE sex = M;
+
+SELECT SUM(salary) --> it sums all salarys togther
+FROM employee;
+
+
+SELECT COUNT(sex) ,sex -->  this will return F and M each with its count this called AGREGATION 
+FROM employee
+GROUP BY sex;
+
+SELECT SUM(total_sales) ,emp_id -->  SUMS total_sales for each emp_id and return them
+FROM works_with
+GROUP BY emp_id;
+
+////////////////// WILD CARDES (LIKE ) --> LIKE uses patterns (-- % = any number of characters, _ = one character)
+
+
+SELECT *
+FROM client
+WHERE client_name LIKE '%LLC'; --> so that means any charachter at the star and ends with LLC
+
+
+%LLC% --> this means any word that have LLC in middle of it
+
+'____-10%' --> this will give us all dates in october 
+
+  
+////////////////// UNION  --> when doing union the column of first SELECT must be the same as the rest with same datatype
+
+
+SELECT first_name AS Employee_Branch_Names
+FROM employee
+UNION                                                       ---> this will bring both first_name column and branch_name 
+SELECT branch_name
+FROM branch;
+
+SELECT client.client_name AS Non-Employee_Entities, client.branch_id AS Branch_ID
+FROM client
+UNION
+SELECT branch_supplier.supplier_name, branch_supplier.branch_id
+FROM branch_supplier;
+
+
+////////////////// JOINS (INNER JOIN , LEFT JOIN --> you will get all of rows of left table(its the one after FROM statment) , RIGHT JOIN --> same as the LEFT but right table(is the one after JOIN statment))
+
+INSERT INTO branch VALUES(4, "Buffalo", NULL, NULL);
+
+SELECT employee.emp_id, employee.first_name, branch.branch_name  --> when JOIN 2 tables you can put column from each table here that you need 
+FROM employee
+JOIN branch    --> LEFT JOIN, RIGHT JOIN
+ON employee.emp_id = branch.mgr_id;  --> this will return only the info when this is right
+
+////////////////// NESTED QUERYS --> you use nested to get data depending on other data that you query
+
+
+SELECT employee.first_name, employee.last_name
+FROM employee
+WHERE employee.emp_id IN (SELECT works_with.emp_id
+                          FROM works_with
+                          WHERE works_with.total_sales > 50000);
+
+
+////////////////// TRIGERS --> its a peace of code that will get trigerde when sertain action happen like adding a row to a table
+
+
+DELIMITER $$ --> this change ; to end things with $$ instead
+CREATE
+    TRIGGER my_trigger BEFORE INSERT
+    ON employee
+    FOR EACH ROW BEGIN
+        INSERT INTO trigger_test VALUES(NEW.first_name);  ---> NEW refere to the value that getting inserted
+    END$$ --> to END the TRIGGER 
+DELIMITER ;  --> changing $$ back to semicolm (;)
+
+
+DELIMITER $$
+CREATE
+    TRIGGER my_trigger BEFORE INSERT
+    ON employee
+    FOR EACH ROW BEGIN
+         IF NEW.sex = 'M' THEN
+               INSERT INTO trigger_test VALUES('added male employee');
+         ELSEIF NEW.sex = 'F' THEN
+               INSERT INTO trigger_test VALUES('added female');
+         ELSE
+               INSERT INTO trigger_test VALUES('added other employee');
+         END IF;
+    END$$
+DELIMITER ;
+INSERT INTO employee
+VALUES(111, 'Pam', 'Beesly', '1988-02-19', 'F', 69000, 106, 3);
+
+
+DROP TRIGGER my_trigger;
+
+
+ER DIAGRAMS 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

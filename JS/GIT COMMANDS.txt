@@ -1,0 +1,59 @@
+
+
+
+git init ---> for intialize repo
+git remote add origin git@github.com:NetFitt/mini-project.git
+git add <file> or * for every thing ---> to send to stage
+git commit -m "your message" ---> to commit
+git push origin main ---> to push your commits to remote repo 
+git push origin main --force ---> to force
+git pull origin main ---> to get files from the github (remote repo)
+git log ---> to see all commits 
+git clone git@github.com:NetFitt/mini-project.git ---> to get the files from remote repo
+
+ssh-keygen -t rsa -b 4096 -C "your email" ---> to make a public key 
+cat ~/.ssh/id_rsa.pub ---> to show the hashed key then copy it and put it in github so you can have access with this key (settings -> ssh & gpg -> new ssh key -> past here and give it a name)	
+ssh -T git@github.com ---> to connect with it
+
+git push origin --delete <name of tags or branches> ---> to delete branches and tages on the remote localy
+
+git restore --staged <file name> or * ---> restore from staged
+git clean -n ---> show files that will be deleted
+git clean -f ---> to delete unstaged files
+git reset ---> to uncommit
+git reset --hard <hash of the commit> ---> to delete the head commit (head is the last commit)each commit have a hash you get in git log
+you can move head to anothe commit by pushing it
+
+git branch ---> to show list of branches
+git branch <name of branch> ---> to creat branch 
+git branch -d <name of branch> ---> to deleat branch 
+git branch -D <name of branch> ---> to delet branch without checking
+git branch -m <name of branch> ---> to rename a branch
+git checkout <name of branch> ---> to switch between branches
+git checkout -b <name of branch> ---> to creat branch and switch to it at the same time
+
+
+git merge <name of branch> ---> merge the current branch with branch you putt so it became one
+
+
+git config --global alias.cm "-m commit" ---> to use cm instead of -m commit
+
+
+git stash ---> you can stash things after adding them just like commit but it hides them
+git stash save "message" ---> you can give each stach a message so you know what is inside
+git stash list ---> to show all your stashs each stash has its own id (id is a number from 0 to etc) 
+git stash pop ---> to pop your last stash that you make (will delete it)
+git stash apply ---> to pop your last stach but keeping the stach as it was (won't delete it)
+git stash drop ---> to destroy last stash 
+git stash show ---> to show the last stash
+git stash clear ---> to clear and destroy every stash
+git stash pop or apply or drop or show stash@{id} ---> to (pop or apply or drop or show) the stash with that id inside ( {} )
+
+
+touch .gitignore ---> this is a file which you can write the name of the files that you want to be ignored by the git commands
+
+
+git tag <name of tag> ---> you can put a tag then push commits to be under these tag
+git tag -a <name of tag> -m "the message" ---> if you want to make message or descrption
+git tag -l "v1.*" ---> to get all v1.0 => v1.etc
+git push origin --tags ---> to push all tags

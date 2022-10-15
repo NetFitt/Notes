@@ -1,0 +1,153 @@
+
+/*  Loop Control
+  - Break
+  - Continue
+  - Label
+  */
+
+-loop control example
+
+    let products = ["Keyboard", "Mouse", "Pen", "Pad", "Monitor"];
+
+    let colors = ["Red", "Green", "Black"];
+
+    mainLoop: for (let i = 0; i < products.length; i++) {
+    console.log(products[i]);
+    nestedLoop: for (let j = 0; j < colors.length; j++) {
+        console.log(`- ${colors[j]}`);
+        if (colors[j] === "Green") {
+        break mainLoop;
+        }
+    }
+    }
+
+
+
+/*Function
+  - Rest Parameters
+  - Only One Allowed
+  - Must Be Last Element
+  - Anonymous Function
+  - Calling Named Function vs Anonymous Function
+  - Argument To Other Function
+  - Task Without Name
+  - SetTimeout
+*/
+
+
+-Function
+    function calc(...numbers) {
+    // console.log(Array.isArray(numbers));
+    let result = 0;
+    for (let i = 0; i < numbers.length; i++) {
+        result += numbers[i]; // result = result + numbers[i]
+    }
+    return `Final Result Is ${result}`;
+    }
+
+    console.log(calc(10, 20, 10, 30, 50, 30));
+    
+    let calculator = function (num1, num2) {
+    return num1 + num2;
+    };
+
+    console.log(calculator(10, 20));
+
+    function sayHello() {
+    console.log("Hello Osama");
+    }
+
+    document.getElementById("show").onclick = sayHello;
+
+    setTimeout(function elzero() {
+    console.log("Good");
+    }, 2000);
+
+    
+/* Higher Order Functions
+  ---> is a function that accepts functions as parameters and/or returns a function.
+
+  - Map
+  --- method creates a new array
+  --- populated with the results of calling a provided function on every element
+  --- in the calling array.
+
+  Syntax map(callBackFunction(Element, Index, Array) { }, thisArg)
+  - Element => The current element being processed in the array.
+  - Index => The index of the current element being processed in the array.
+  - Array => The Current Array
+
+  Notes
+  - Map Return A New Array
+
+  Examples
+  - Anonymous Function
+  - Named Function
+
+  - Filter ep73
+  --- method creates a new array
+  --- with all elements that pass the test implemented by the provided function.
+
+  Syntax filter(callBackFunction(Element, Index, Array) { }, thisArg)
+  - Element => The current element being processed in the array.
+  - Index => The index of the current element being processed in the array.
+  - Array => The Current Array
+
+  - Reduce
+  --- method executes a reducer function on each element of the array,
+  --- resulting in a single output value.
+
+  Syntax
+  reduce(callBackFunc(Accumulator, Current Val, Current Index, Source Array) { }, initialValue)
+  - Accumulator => the accumulated value previously returned in the last invocation
+  - Current Val => The current element being processed in the array
+  - Index => The index of the current element being processed in the array.
+  ---------- Starts from index 0 if an initialValue is provided.
+  ---------- Otherwise, it starts from index 1.
+  - Array => The Current Array
+  
+  - forEach
+  --- method executes a provided function once for each array element.
+
+  Syntax forEach(callBackFunction(Element, Index, Array) { }, thisArg)
+  - Element => The current element being processed in the array.
+  - Index => The index of the current element being processed in the array.
+  - Array - The Current Array
+
+  Note
+  - Doesnt Return Anything [Undefined]
+  - Break Will Not Break The Loop
+
+  */
+- map Examples
+                  let myNums = [1, 2, 3, 4, 5, 6];
+
+                  let newArray = [];
+
+                  for (let i = 0; i < myNums.length; i++) {
+                    newArray.push(myNums[i] + myNums[i]);
+                  }
+
+                  console.log(newArray);
+
+                  // Same Idea With Map
+
+                  // let addSelf = myNums.map(function (element, index, arr) {
+                  //   // console.log(`Current Element => ${element}`);
+                  //   // console.log(`Current Index => ${index}`);
+                  //   // console.log(`Array => ${arr}`);
+                  //   // console.log(`This => ${this}`);
+                  //   return element + element;
+                  // }, 10);
+
+                  // let addSelf = myNums.map((a) => a + a);
+
+                  // console.log(addSelf);
+
+                  function addition(ele) {
+                    return ele + ele;
+                  }
+
+                  let add = myNums.map(addition);
+
+                  console.log(add);

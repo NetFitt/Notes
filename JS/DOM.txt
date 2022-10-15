@@ -1,0 +1,112 @@
+
+							OBJECTS
+
+  Object
+  - Create Object With Create Method
+
+  DOM
+  - What Is DOM
+  - DOM Selectors
+  --- Find Element By ID
+  --- Find Element By Tag Name
+  --- Find Element By Class Name
+  --- Find Element By CSS Selectors
+  --- Find Element By Collection
+  ------ title
+  ------ body
+  ------ images
+  ------ forms
+  ------ links
+
+  DOM [Get / Set Elements Content And Attributes]
+  - innerHTML  ---> any html code will get applied 
+  - textContent ---> make every thing a text even html code
+  - Change Attributes Directly
+  - Change Attributes With Methods
+  --- getAttribute
+  --- setAttribute
+
+  Search
+  - innerText
+
+  DOM [Check Attributes]
+  - Element.attributes
+  - Element.hasAttribute
+  - Element.hasAttributes
+  - Element.removeAttribute
+
+  DOM [Create Elements]
+  - createElement
+  - createComment
+  - createTextNode
+  - createAttribute
+  - appendChild
+
+  DOM [Deal With Childrens]
+  - children
+  - childNodes
+  - firstChild
+  - lastChild
+  - firstElementChild
+  - lastElementChild
+
+  DOM [Events]
+  - Use Events On HTML
+  - Use Events On JS
+  --- onclick
+  --- oncontextmenu
+  --- onmouseenter
+  --- onmouseleave
+
+  --- onload
+  --- onscroll
+  --- onresize
+
+  --- onfocus
+  --- onblur
+  --- onsubmit
+
+  DOM [Events]
+  - Validate Form Practice
+  - Prevent Default
+
+  DOM [Events Simulation]
+  - click
+  - focus
+  - blur
+
+  DOM [Class List]
+  - classList
+  --- length
+  --- contains
+  --- item(index)
+  --- add
+  --- remove
+  --- toggle
+
+  DOM [Deal With Elements]
+  - before [Element || String]
+  - after [Element || String]
+  - append [Element || String]
+  - prepend [Element || String]
+  - remove
+
+  DOM [Traversing]
+  - nextSibling
+  - previousSibling
+  - nextElementSibling
+  - previousElementSibling
+  - parentElement
+
+  DOM [Cloning]
+  - cloneNode(Deep)
+
+  DOM [Add Event Listener]
+  - addEventListener
+  - Use Without On
+  - Attach Multiple Events
+  - Error Test
+
+  Search
+  - Capture & Bubbling JavaScript
+  - removeEventListener

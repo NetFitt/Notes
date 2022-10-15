@@ -1,0 +1,87 @@
+  
+ BOM [Browser Object Model]
+  - alert(Message) => Need No Response Only Ok Available
+  - confirm(Message) => Need Response And Return A Boolean
+  - prompt(Message, Default Message) => Collect Data
+
+  BOM [Browser Object Model]
+  - setTimeout(Function, Timeout, Additional Params)
+  - clearTimeout(Identifier)
+  
+  BOM [Browser Object Model]
+  - setInterval(Function, Millseconds, Additional Params)
+  - clearInterval(Identifier)
+
+  BOM [Browser Object Model]
+  - location Object
+  --- href Get / Set [URL || Hash || File || Mail]
+  --- host
+  --- hash
+  --- protocol
+  --- reload()
+  --- replace()
+  --- assign()
+
+  BOM [Browser Object Model]
+  - open(URL [Opt], Window Name Or Target Attr [Opt], Win Features [Opt], History Replace [Opt])
+  - close()
+  - Window Features
+  --- left [Num]
+  --- top [Num]
+  --- width [Num]
+  --- height [Num]
+  --- menubar [yes || no]
+
+  Search
+  - Window.Open Window Features
+
+  BOM [Browser Object Model]
+  - History API
+  --- Properties
+  ------ length
+  --- Methods
+  ------ back()
+  ------ forward()
+  ------ go(Delta) => Position In History
+
+  Search [For Advanced Knowledge]
+  - pushState() + replaceState()
+
+  BOM [Browser Object Model]
+  - stop()
+  - print()
+  - focus()
+  - scrollTo(x, y || Options)
+  - scroll(x, y || Options)
+  - scrollBy(x, y || Options)
+
+  BOM [Browser Object Model]
+  - Practice => Scroll To Top
+  - scrollX [Alias => PageXOffset]
+  - scrollY [Alias => PageYOffset]
+
+  BOM [Browser Object Model]
+  Local Storage
+  - setItem
+  - getItem
+  - removeItem
+  - clear
+  - key
+
+  Info
+  - No Expiration Time
+  - HTTP And HTTPS
+  - Private Tab
+
+  BOM [Browser Object Model]
+  Session Storage
+  - setItem
+  - getItem
+  - removeItem
+  - clear
+  - key
+
+  Info
+  - New Tab = New Session
+  - Duplicate Tab = Copy Session
+  - New Tab With Same Url = New Session
