@@ -12,3 +12,36 @@ Print in java
 
 - sout -> System.out.println()
 
+conditions 
+
+- if -> like all other programing lang
+- switch -> ex: switch (a){
+		    case 1:	
+			 System.out.println("a is one ! ")
+		  	 break;
+		    case 2:
+			 System.out.println("a is two ! ")
+			 breack;
+		    defaulte:
+			 System.out.println("a is not one nor two! ")
+			 breack;
+
+		}	
+
+Loops (same as other lang) --> can have breack and continue inside 
+
+
+user inputs
+
+- Scanner input = new Scanner(System.in); -> then use use this object input.nextint();
+- Random number 
+
+
+
+
+
+
+
+
+
+	
