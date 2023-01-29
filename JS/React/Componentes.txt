@@ -1,0 +1,11 @@
+
+
+
+
+-Compononts are a function that start with capital letter and have an object (props) as an argument
+-Compononts return a React Elemenet
+-to use Compononts you need to pass it by ReactDOM.createElement(Componont , {props}) 
+or use  tool chain like <Message message="hello world!" /> -> this JSX
+
+- Events
+

@@ -1,0 +1,46 @@
+ npm install -D tailwindcss postcss autoprefixer
+ npx tailwindcss init -p
+
+
+ npm run dev
+
+
+    MUI 
+    
+    -Typography		
+
+        <Typography variant="subtitle1" component="h1" gutterBottom>تجريب</Typography>
+        variant -> h(1-6) <h> , subtitle(1-2) is a <h6> , body(1-2) is a <p> , overline is a <span>
+        component -> the html that wrap it like <h1> or <div> ...
+
+    -Stack 
+        
+	    <Stack spacing={2} direction="row"></Stack>	
+	    spacing-> the space between the children elements 
+	    direction-> for the direction of the children 	
+    
+    -Button 
+
+        <Button  href="#typo" variant='contained' color="warning" startIcon={<sendIcon/>}>contained</Button>
+        
+        variant-> contained , text , outlined
+        href-> when you add it this becomes an <a> tag.
+        color-> warning , Primary , Secondary ... each its color.
+        size-> small , medium ,large
+        startIcon & endIcon-> for adding icons to the button eather from the start or end.
+        onClick-> for event listener pass a function
+
+    -IconButton
+
+        <IconButton aria-label="s" color='success' size="small" >
+            <AbcIcon/>
+        </IconButton>
+
+    -GroupButton
+	
+
+
+	
+
+
+	

@@ -34,7 +34,8 @@ Loops (same as other lang) --> can have breack and continue inside
 user inputs
 
 - Scanner input = new Scanner(System.in); -> then use use this object input.nextint();
-- Random number 
+- Random number Random random = new Random();
+
 
 
 

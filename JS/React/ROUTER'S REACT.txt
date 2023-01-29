@@ -1,0 +1,71 @@
+-Router's
+
+	-BroweserRouter
+	-HashRouter -> hashed url
+	-StaticRouter -> spesifies a const url used for server rendering
+	 <StaticRouter location='/'></StaticRouter>
+	-NativeRouter -> for react native
+
+-Dynamic Routers
+      
+    -<Routes></Routes> -> contain's <Route/> 
+		->location="/books" it hard go to this url
+	
+	-<Route path="/books/:id" element={<Home /> } /> 
+		-> ':' the two points indecate for a variable example(/books/1) the id is 1
+			/const {id} = useParams(); this returns the var you put in the url like :id
+		-> element is the componant that url or route will take 
+		-> note: if you used the path="/books/new" it will go to this path instead of :id BECAUSE its hard coded
+	
+	-<Link to="/books/1"></Link> 
+	    -> to is the url that will load the route you used
+
+-Nested Routers
+	-we use nested if we have multi <Route/> that have same part of url like:
+		->these routes have same url /New
+			<Route path='/New' element={<New />} />
+			<Route path='/New/:id' element={<Books />} />
+			<Route path='*' element={<NotFound/>} />
+      
+		so we do we use nested <Routes> instead
+
+			<Route path='/New' element={ <BooksLayout/> }> -> the BooksLayout componant will load in all children since its in the parent element Route
+				<Route index element={<New />} />
+				<Route path=':id' element={<Books />} />
+			</Route>
+		-> <Outlet context={ {hello: 'new world'} }/> for rendering the children in nested Routes
+			
+			context is used to pass data to other pages in the same parent route;
+
+			/useOutletContext() is a hook that returns the object that got passed in <Outlet context/> context
+				Note: you use this only in the wraped routes.
+		-> you can put every thing in difrent file 
+		-> useRoute() hook unrecomended
+
+-Link Componant
+	-<Link to="/" replace>test</Link> | <Link to="/" reloadDocument>test</Link> | <Link to="/" state={}>test</Link>
+		->replace if you have in <Link> it completly remove the page you currently on from history so when you click back you go to the page before that one.
+			usefull in login page
+		->reloadDocument when you have it in <Link> it reload the whole page not only rendering
+		->state
+			useLocation() HOOK return an object that have state and other values here you accese state
+			location.state you use it to pass info from componante to another
+
+	-<NavLink style={({ isActive: })=>{
+		return { if(isActive){{color:"red"}}else }
+		}}></NavLink>
+
+
+		->className
+		->style
+			isActive is boolean eather falls or true depends if your in that path.
+			default if you have css file with class .active it will take it by default if the path is active.
+		->end it will match only its value of it self means the children wont apply to the .active class	
+		->children
+	-<Navigate></Navigate>
+		-> this componant will auto work unlike Link or Navlink
+		->useNavigate() HOOK returns a function that accept 2 arrguments navigate("/" , {replace , state }) or navigate(-1) to go back depends on the value. 
+			you should use it in forums to direct to the next page
+-Search Params
+	-useSearchParams() HOOK works like useState() but works with the url
+
