@@ -6,13 +6,19 @@ git branch -M main -- > for creating main branch
 
 
 git init ---> for intialize repo
-git remote add origin git@github.com:NetFitt/mini-project.git
+git remote set-url origin <new-URL> --> to reset the old remote
+git remote rm <name> -> to remove remotes
 git add <file> or * for every thing ---> to send to stage
+git reset <file> or * for every thing ---> to remove from stage
 git commit -m "your message" ---> to commit
+
 git push origin main ---> to push your commits to remote repo 
 git push origin main --force ---> to force
+
 git pull origin main ---> to get files from the github (remote repo)
+
 git log ---> to see all commits 
+
 git clone git@github.com:NetFitt/mini-project.git ---> to get the files from remote repo
 
 

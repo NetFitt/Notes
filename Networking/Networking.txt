@@ -1,0 +1,48 @@
+/// CISCO CLI CODES
+
+/ SWITCHES & VLAN
+
+switch> en                                                                  <<< to enable the sudo mode
+switch# show vlan brief                                                     <<< shows the vlans on the switch [ switch# ]
+switch# config terminal                                                     <<< to enter config terminal  [ switch(config)# ]
+switch(config)# vlan 10                                                     <<< to create a VLAN 10 and enter its configuration [ switch(config-vlan)# ]
+switch(config-vlan)# name *name*                                            <<< to name your vlan ignore the * when seen
+switch(config-vlan)# exit                                                   <<< to exit from the vlan config
+
+switch(config)# inter *name of the port example (fa0/1)*                    <<< to enter to the interface or the port config [ switch(config-if)# ]
+switch(config-if)# switchport mode access                                   <<< to assign this port as access 
+switch(config-if)# switchport acc vlan 10                                   <<< to assign the acc port to a vlan
+switch(config-if)# switchport mode trunk                                    <<< to assign this port as trunk  
+switch(config-if)# show inter trunk                                         <<< to assign this port as trunk
+
+switch(config-if)# desc  *the description you want to give the port *       <<< to give a certain port a description
+switch(config-if)# end                                                      <<< in order to go to the enabled direct
+switch# show interfaces status                                              <<< to show the status of each port all ports 
+switch# show interface fa0/1                                                <<< to show all information about fa0/1 port only 
+
+
+/STP 802.1D
+
+switch# show spa                                                            <<< to show details about the STP (STP is all automatic thats why no need to configs)
+
+/CDP 
+
+switch# show cdp neighbor                                                   <<< to give you all information about that switches neighbores
+switch# show cdp neighbor detail                                            <<< to give you all detailed information about that switches neighbores    
+
+/LLDP 
+
+switch# lldp run                                                            <<< to run lldp in cisco devices 
+switch# show lldp neighbor                                                  <<< to give you all information about that switches neighbores                                                  
+switch# show lldp neighbor detail                                           <<< to give you all detailed information about that switches neighbores
+
+/LACP
+
+switch(config)# interface range  fa 0/1-3                                   <<< this is for make one config for a range of ports fa0/1 to fa0/3, fa0/2 included
+switch(config-if-range)# shutdown                                           <<< to shut down the ports 
+switch(config-if-range)# no shutdown                                        <<< that will enable them again
+
+switch(config-if-range)# channel-group *name of the LACP channel from fa0/1 to fa0/3* mode *ACTIVE or PASSIVE*   <<< to create the virtual link and name it 
+
+swithc# show etherchannel summary                                           <<< to show you the PORT CHANNEL LACP information on your switch
+switch(config)# inter po1                                                   <<< to enter the channel that is named 1 to make configs to it if you want 

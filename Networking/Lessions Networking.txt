@@ -1,0 +1,61 @@
+////CHAPTER 2 LAYER 2 (SWITCHES)
+
+/// STP (Spanning Tree Protocol) very important Protocol 802.1D
+
+/PART ONE 
+
+- when making 3 switches linked there will be a loop when send a packet throw this network 
+- STP requires election to be preformed first, STP will find which ports should be opend
+- STP is completly automatic
+- every switch in cisco have a bridge-priority which is 32768 the switch that has the smallest will be prioratised and wont close its port
+- bridge-priority can be edited since its by default always 32768
+- if the switches all have same bridge-priority then it will priortise the switch with the lowest MAC address the winner will have 'Designated ports'
+- the chosen switch its ports will stay open as well as the facing ports of these ports on other switches and these ports named 'ROOT BRIDGE'
+- the closed port named the Alternative port : Blocking state.
+- Bridge ID is Bridge-priority.Mac Address example : 32768.00:11:22:AA:BB:CC
+- The winner must be : 1-Lowest Priority , 2-Lowest MAC Address
+- the proccess of election take about (30 - 50)seconds
+        MAX AGE = 20 + (Forwarding delay = 15) + (Learning Delay = 15) = 50 seconds
+- NOTE: if one of the links is busted then the STP will start the election again which is bad since it takes 50secondes that means 50 secondes out of service
+
+/PART TWO ep25
+
+- In order to speed things up :
+        Rapid STP RSTP(802.1W) : No Listening , No Blocking, Only (Discard, Forwarding ,Learning) then delay will become 3 + 3 = 6 seconds
+- when having vlans you can make a vlan as root bridge so the STP will reelect (3rd generation)
+        that will be called Per-VLAN STP (PVST) 802.1S
+        Each VLAN can have its own Election!!!
+        Each Vlan can have its own Root Bridge!
+        Things are much better network
+
+        Specially that there is a RPVST+ (faster)
+
+- Now, Edge ports and Port Fast: whats the cases and diffrences?
+        let's say you have an end device inside the 3 switches that require STP, you should assing the port of that end device as Edge port so it does not 
+     enter the elections, Port fast if you want to keep a port always as designated port so it wont be blocked(however that's dangrous because you could chose the one that was gona be blocked then its gona be a loop)   
+
+* Dont forget MST 802.1S (5th generation) : MST is made for groups of VLAN'S
+
+/// CDP (Cisco Discovery Protocol ) and LLDP (Link Layer Discovery Protocol) these protocols are automatic
+
+- so the CDP is a protocol to know the neighbors that are connected and in which device in which port and with its information's
+- these info are like this :
+        My port that is connected to it 
+        its port that is connected to me
+        the IP address of the neighbor device 
+        the MAC address of the neighbor device 
+        port description of the neighbor
+- you can change names of each port 
+- CDP works only on cisco devices but LLDP works on all devices even cisco devices
+
+///LACP (Link Aggregation Control Protocol) PORT CHANNEL
+
+- this protocol make 2 to 8 ports to function as one port to add to the bandwidth of the cable
+- in some devices must be serialized the ports like (1-2-3 ..etc) some dont need to 
+- to have this protocol one of the devices must be ACTIVE
+
+
+////CHAPTER 3 LAYER 3 (Routers) STATIC , OSPF thats what is learned in CCNA
+
+- IP Connectivity : RTP is old , OSPF need about 50%,EIGRP is rare now a days , BGP is taken out, IS-IS all of these are protocols for the layer three devices which are mainly Routers
+- Routing is reciveing the packets study the destination how many switchs and routers in the way then send it 
