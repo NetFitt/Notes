@@ -57,5 +57,55 @@
 
 ////CHAPTER 3 LAYER 3 (Routers) STATIC , OSPF thats what is learned in CCNA
 
+/STATIC Routing
+
 - IP Connectivity : RTP is old , OSPF need about 50%,EIGRP is rare now a days , BGP is taken out, IS-IS all of these are protocols for the layer three devices which are mainly Routers
 - Routing is reciveing the packets study the destination how many switchs and routers in the way then send it 
+
+- Static Route : the only way is manualy routre a specific packet to a specific route
+- the first next-hop can either be the egress interface port ID or, the next reachable IP Address
+- Available for IPv4 and IPv6
+- can route a host ex:192.168.1.1/32 thts one device or a network 
+
+- Static route Flavores : 
+        Default Route : every un-mentioned subnet to be routed here , also, can be default Gateaway
+        Floating Static : a hidden back-up plan
+                -to make Floating Static theres conditions: 
+                the Static route must have AD of 1 (so that the static always will have priority)
+                the AD number should have a number less than other protocols like OSPF EIGRP so its better if you keep it beween 1-89
+                
+
+/DYNAMIC Routing (OSPF Open Shortest-Path First) ep 36
+
+- Administrative Distance AD = 110
+- Metric = Cost (lesser=better) = 10^8 / bandwidth (kb/s)
+- Dijkstra algorithm
+- SPF algorithm for route decision
+- Process ID for multiple instances 
+- Area ID for Data Base isolaton 
+        using area's all areas must be connected to the area number 0, if not then OSPF wont work on that area 
+
+- Link-State Advertisements LSA: negotiation between OSPF Routers
+        It contains: LSRequest:Provides the missing information
+                     LSUpdate:Replys to the LSR
+                     LSAcknowledgment: Reply to LSU 
+NOTE: LS Data base LSDB is in every router of the network that use OSPF
+
+- Neighboring Process
+        P2P Neighboring Process : no problems here
+        can be connected throw a switch !!
+                Broadcast will happen
+                Elections will take place (these elections to chose a DR which is automatic )
+                Only One router should update the topology (DR)
+
+                A DR (Designated Router): Highest Router Priority (0-255) ,Default = 128 or highest RID (router id)
+                Router ID (RID):32bit address
+        DR needs BDR Back-up DR (second best of every thing) 
+        other router are DR others 
+        - relations 
+                DR <--> all = full adjacent 
+                BDR <--> all = full adjacent
+                DROther <--> DROther = neighbor, the relation stop at 2 way step (look at the OSPF image) 
+
+/// CHAPTER 4 IP services (10 Protocols for layer 3)
+

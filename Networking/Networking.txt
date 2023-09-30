@@ -44,5 +44,43 @@ switch(config-if-range)# no shutdown                                        <<< 
 
 switch(config-if-range)# channel-group *name of the LACP channel from fa0/1 to fa0/3* mode *ACTIVE or PASSIVE*   <<< to create the virtual link and name it 
 
-swithc# show etherchannel summary                                           <<< to show you the PORT CHANNEL LACP information on your switch
+switch# show etherchannel summary                                           <<< to show you the PORT CHANNEL LACP information on your switch
 switch(config)# inter po1                                                   <<< to enter the channel that is named 1 to make configs to it if you want 
+
+/STATIC Routing
+
+- NOTE: to configure the STATIC Routing there's steps to do 
+        -Initial configuration 
+            - IP Addres + subnet mask + Gateway to all end devices
+                Gateways are given to end devices only and must have the ip address of the first router port that it interact with 
+            - unshut all interfaces (when starting with routers they are shut down at first)
+            - in routers you can enter ports same way as switches using interface 
+
+Router(config-if)# ip add 192.168.1.1 255.255.255.0                         <<< to add the IP for the port 
+Router(config-if)# no shut                                                  <<< to un shut the port as mentioned in the NOTE      
+Router# show ip inter brief                                                 <<< to show all details about the ip address on the ports 
+Router(config)# ip route *the ip address of the network* *subnet mask of the networ* *the ip of gateway* <<< to route packates to another network
+Router(config)# no ip route *the ip address of the network* *subnet mask of the networ* *the ip of gateway* <<< to delete route packates to another network
+Router# show ip route                                                       <<< to show the routing table and its detail 
+
+/Floating STATIC (Multi layer switch)
+
+switch(config-if)# no switchport                                            <<< to change the port from switch port to router port
+switch(config-if)# ip routing                                               <<< to enable routing init
+switch# show run                                                            <<< to show all configs even the static routes
+
+/STATIC Routing IPV6
+
+Router(config)# ipv6 unicast-routing                                         <<< to enable ipv6 in routers
+Router(config-if)# ipv6 add *the ipv6 address of the network*/*subnet mask of the networ*  <<< thats how you assign a ipv6 addres to a port 
+Router(config-if)# ipv6 route *the ipv6 address of the network*/*subnet mask of the networ* *the ip of the gateway*     <<< for routing in ipv6
+NOTE: on generale when using ipv6 all the ip in the code before just change it to ipv6
+
+/OSPF 
+
+Router(config)# router ospf *Process ID*                                     <<< to start ospf
+Router(config-router)# network *network ID* *wild card mask* area *area number*                   <<< to advertise the networks on the router
+Router# show ip ospf neighbor                                                <<< to see the ospf configs
+Router# show ip ospf database                                                <<< to see the ospf database of the router
+
+NOTE: wild card mask is the oposite of subnet mask for example: 255.255.255.0 wild card of this is : 0.0.0.255
