@@ -78,9 +78,116 @@ NOTE: on generale when using ipv6 all the ip in the code before just change it t
 
 /OSPF 
 
-Router(config)# router ospf *Process ID*                                     <<< to start ospf
+Router(config)# router ospf *Process ID*                                     <<< to start ospf (process id is your choice)
 Router(config-router)# network *network ID* *wild card mask* area *area number*                   <<< to advertise the networks on the router
 Router# show ip ospf neighbor                                                <<< to see the ospf configs
 Router# show ip ospf database                                                <<< to see the ospf database of the router
 
 NOTE: wild card mask is the oposite of subnet mask for example: 255.255.255.0 wild card of this is : 0.0.0.255
+
+/DHCP
+
+Router(config)# ip dhcp pool *any name you want*                              <<< to create your dhcp pool of ip's
+Router(config)# ip dhcp exclude-address *the Gateaway ip or any ip you want to exclude from the pool * <<< for excluding ip's from dhcp pool
+Router(dhcp-config)# network *the ID of the network IP* *the subnet mask*     <<< to give you pool ips from the network you chossed
+Router(dhcp-config)# default-router *the ip of the gateway port of ur router* <<< to give the ip's in your pool a Gateaway
+Router(dhcp-config)# dns-server 8.8.8.8                                       <<< to assing a dns server in ur network
+
+
+Router# show ip dhcp binding                                                  <<< to show all enddevices that got ip address from the pool
+Router(config)# hostname *the name you want for the device*                   <<< to change name of your device in this case the router
+
+Router(config-if)# ip helper-address *the gateaway ip*                        <<< so the broadcast request can reach the gateway ip  
+
+NOTE: - google have provided DNS to any one who want's on that ip 8.8.8.8 , 8.8.4.4, 4.2.2.2, 1.1.1.1 .
+      - becarefull the pool might chose the gateway ip ltes say you chosed 192.168.10.0 /24 and gateaway is 192.168.10.1
+this might result in problem since the pool have 192.168.10.1 in it, to fix this problem you have to exclude the gateaway 
+ip using the command from before
+      - you should exclude ips before configuring the pool since all pc's are automaticly using dhcp  
+      
+      - in some cases there might be 1 router that have the pool while have more than one router and want them to chares same pool
+you have to make DHCP Relay so the meesage from the first router can reach the other router which has the pool, in order to do that theres steps :
+
+            1-initiation (give all ports(of the router that are connected) ips )
+            2-create DHCP POOL on the router you want 
+            3-make static routing between the router using ospf or normal routing 
+            4-give the port which is connected to the end devices on other routers no dhcp a helper-address using command from before so the 
+            request's reach the dhcp router
+
+/NAT 
+
+- STATIC NAT
+Router(config)# ip nat inside source static *privat ip address * *public ip address*              <<< the nat
+Router(config-if)# ip nat inside                                                        <<< to tell the port that is the inside network
+Router(config-if)# ip nat outside                                                       <<< to tell it its outside network internet
+Router# show ip nat translations                                                        <<< to see all the translations that the nat did
+Router# show ip nat statistics                                                          <<< to see all nat statistics
+
+
+NOTE:to apply NAT 
+      -make Initial configs
+      -NAT 
+      -Port you tell your port which is connected to the net and which to the private
+
+- DYNAMIC NAT     k
+Router(config)# access-list *number you want to give it* permit *network id of the inside network* *wild mask card * <<< to make an access list that is required in dynamic NAT
+Router(config)# ip nat pool *name your pool* *first ip address of you public ip's*  *the last public ip address you have* netmask *subnet mask of that network*    <<< creating a pool for the nat
+Router(config)# ip nat inside source list *number of your list* pool *name of your pool*
+
+
+NOTE:to apply DYNAMIC NAT 
+      -make Initial config
+      -make a list 
+      -create NAT pool 
+      -link the pool with the list 
+
+/NTP
+
+Router# clock set *hh:mm:ss* *dd mm yyyy*                                  <<< to set the date and the time of a router
+Router(config)# ntp master *statrum number <1-15> or default dont put any will be 8* <<< to make it the server with priority of the statrum  
+Router# show clock                                                         <<< to see the date and the time
+Router(config)# ntp server *the ip address of the server*                  <<< to assing the server router for the client router
+Router# show ntp associations                                              <<< to see all details
+
+NOTE: to apply it manualy 
+      -set clock of one router and make it the server for the rest of ther routers 
+      to app
+
+/SSH
+
+Router(config)# ip domain-name *name of the domain*                        <<< to create a domain 
+Router(config)# crypto key generate rsa *512 or 768*                       <<< to create crypto key 
+Router(config)# ip ssh                                                     <<< so see the key
+Router(config)# ip ssh version 2                                           <<< to make ssh key version 2 768
+Router(config)# line vty *the start of the vty 0-15* *the end of the vty*  <<< to enable ssh so the remote guys can enter throw the ssh
+Router(config-line)# transport input ssh                                   <<< to enable the transmition of the commands
+Router(config)# username *the user name u want*  password *the password*   <<< for creating username for your ssh users 
+      ||           ||              ||            privilege *privilege level 0-15*
+      ||           ||              ||            secret *secret for a user*
+Router(config)# enable password *the password*                             <<< to give enable a password
+Router# write                                                              <<< to save all your commands how ever be carfull of write erase
+Router# copy running-config startup-config                                 <<< same as write but less dangerous since you wont make write erase
+
+-in the CMD: 
+C:\>ssh -l *user name* *ip address*
+PASSWORD : *password of that user*
+username>en
+PASSWORD :*password if you put it*
+username# *then here you can command the router remotly*
+
+NOTE:first initiation after that 
+      -create domain-name
+      -create crypto key that will be used by the router and the device
+      -line vty endetify a margin of devices 0-15
+      -create username and password to give to people u want them to enter to the domain you created by the ssh
+      -enable password for the router so cant use enable unless you have the password
+
+      -can do it to the switches since you can give ip address to the vlan
+      -and give the switch a default-gateway 
+
+
+
+
+
+
+

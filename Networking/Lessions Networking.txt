@@ -92,20 +92,175 @@
 NOTE: LS Data base LSDB is in every router of the network that use OSPF
 
 - Neighboring Process
-        P2P Neighboring Process : no problems here
-        can be connected throw a switch !!
+        - P2P Neighboring Process : no problems here
+        - can be connected throw a switch !!
                 Broadcast will happen
                 Elections will take place (these elections to chose a DR which is automatic )
                 Only One router should update the topology (DR)
 
                 A DR (Designated Router): Highest Router Priority (0-255) ,Default = 128 or highest RID (router id)
                 Router ID (RID):32bit address
-        DR needs BDR Back-up DR (second best of every thing) 
-        other router are DR others 
+        - DR needs BDR Back-up DR (second best of every thing) 
+        - other router are DR others 
         - relations 
                 DR <--> all = full adjacent 
                 BDR <--> all = full adjacent
                 DROther <--> DROther = neighbor, the relation stop at 2 way step (look at the OSPF image) 
 
-/// CHAPTER 4 IP services (10 Protocols for layer 3)
+/// CHAPTER 4 IP services (10 very important Protocols for layer 3)
+
+/DHCP (Dynamic Host-Configuration Protocol)
+- A Dynamic/Autumatic method to assing IP addresses
+- Not only IP addresses:
+        - Subnet Maskes 
+        - Gateaway
+        - DNS!!
+
+- what's a DNS ? 
+        - Domain Name server: resolve a URL to an ip Address and vice-versa
+        - works on UDP port 53
+        - also , there is a reverse DNS (for )
+
+- DHCP assignments of the ip address will last 24h if the computer still connected and using it after 24h will keep it
+
+IMPORTANT
+- what if the first router (Gateaway) wasn't a DHCP Server ?
+        - there will be a "helper-address"
+        - known as DHCP relay 
+        - help redirecting the Broadcast messages from first Gateaway to the correct DHCP server
+                -to do that theres a command to add the other routers gateaway so they send DHCP messages to the pool router
+                -in order to make a DHCP Relay you have to connect the two router's using static routing or OSPF 
+
+/FHRP (First Hop Redundency Protocol *a family of protocols*) in CCNA (no LAB)
+
+- what if the gateaway went down 
+- another gateway must be in place but how to redirect a message from one to another
+- how many backups can there be ? this depends on which protocol of the three
+- the protocls that can do this are: 
+        -HSRP (Hot Stand-by RP)
+                - cisco only
+                - 2 Gateways
+                - No Load-Balancing
+        -VRRP (Virtual-Router RP)
+                - Open Standard
+                - 2 Gateways
+                - No Load-Balancing
+        -GLBP (Gateaway Load Balancing P)
+                - Cisco only
+                - 4 Gateways
+                - Load-Balancing
+
+/NAT (Network Address Translation) only 2types in CCNA
+
+- to give your networks the ability to access the internet which means this technology is very important .
+- Public ip address cant be assinged to Private devices
+- so here is what is gona happen ,in the router the engneer will add to it the public ip addresses that the company bought
+and when a device want to connect to the internet it will trade its private ip with the public AND VICE-VERSA that what NAT DOES
+- NAT has more than one type (3 Types)
+        - Static NAT : one-one translating by hand
+        - Dynamic NAT : Group-Group translating (almost like DHCP pools)
+        
+        this did not solve anything since there may be thousands of private address however public addresses are valuable and cant buy alot of theme 
+this does alot of exauxte to public addresses So here it comes :
+- PAT (Port Address Translation) also called NAPT or NAT-overlord
+- PAT will do a one to 65535 translation
+        so what happens is one port that have 1 ip public address get splited to 65535 virtual ports which means 65535 devices can use it
+for example: 192.168.1.2 ---> 5.10.10.10:10     <<< vertual port is 10
+
+NOTE:   Private ip addresses cant have internet
+        NAT does not work on multi layer switch only ROUTERS
+
+/NTP (Network Time Protocol)
+
+- Gives a percise information, with real timing and date either by setting an inner clock manualy or asking someone to 
+informe us about us 
+- uses UDP = 123
+
+- each network device (router) in a network has to be either a Server or a Client
+- Stratum is needed: 
+        -how preferred and accurate this source is
+        -starts from 0 - 15
+        -the closest, the better
+        -by default: a cisco router = 8
+
+/SNMP (Simple Network Management Protocol) has no LAB
+
+- Monitor networks from a single point of view
+- uses UDP 161 / 162 (in some cases)
+- the server is the three requester (and recorder)
+
+- at the agent side:
+        - MIB object (the factory)
+        - Agent (The Messenger)
+-SNMP versions: 
+        - v1 :obsolete
+        - v2c : enhanced
+        - v3 : supports Authentication & Encryption  
+
+/Syslog (System Logging) NO LAB
+
+- Stay aware of "everything"
+- Know all what's happening behind the science (or even in front of you!!)
+- starts from obvious informations up to "Emergencies"
+- Server/Client Relationship
+
+- Server can be a Normal server that collects all the information
+- Server can use the "Syslog" or "Splunk" software
+- client is the networking device that generates logs 
+
+- Quote: "Every Awesome Cisco Engineer Will need ice-cream daily" must memorize these :
+        0 - Emergency
+        1 - Alert
+        2 - Critical
+        3 - Error 
+        4 - Warning 
+        5 - Notification
+        6 - Information 
+        7 - Debug
+
+/QOS (Quality of Service) ep51
+
+- This is used to control the band width of the services for example i have my own network and my client's network 
+i rather loose some of the band width on my network than the client lossing it so if congection will happen any ways
+i perefer some traffics than others to have the band width
+
+- Generaly UDP will be preferred than TCP (TCP autamoticly do a retransmistion)
+- QOS will prefer based on vareity of factors , some are:
+        (Classification , Marking , Queueing , Shaping , and Policing)
+-Classification & Marking :
+        classifying the traffic according to its importants
+        (Very High , High , Medium , Low)
+-Queueing 
+        - Giving a specific priority every type of packet 
+        (giving the the priority of 'very high' to UDP traffic)
+        -Diving the Transmission capacity with respect to the priority
+        (giving 40% to the very high ,20% to the high ,etc)
+-Policing & Shaping:
+        -Policing is counting the traffic befor transmiting it , and limiting it 
+        (limit the FTP traffic to be transmitted at maximum of only 2Mbps)
+        -Shaping limits the Queued traffic to a certain amount of traffic.
+        and what EXECEEDS,wait at the queue
+
+/SSH (Secure Shell)
+
+-A secured and trusted method to log in a device remotely
+- uses TCP 22
+- encrypt the transmitted information
+- uses the server/client Relationship
+- a replacement for telnet
+- needs an application for (Microsoft Windows Users)
+
+/FTP (File Transfer Protocol)
+
+- data like files, software images, Configs saved as text's 
+- FTP uses TCP 20.21!
+- 2 TCP ports for 2 reasons:
+        - TCP 20 (Control Channel):to establish connection between 
+                Server and Client 
+        - TCP 20 (Data Channel):to transfer Data between
+                Server and Client
+- there is a relative:
+        -Trivial FTP (TFTP)
+        -uses UDP 69
+        -UDP so, unreliable, but still has its uses
 
